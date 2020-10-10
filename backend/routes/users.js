@@ -1,4 +1,5 @@
 //  Our users routes
+const bcrypt = require("bcrypt");
 
 console.log("In users");
 
@@ -13,8 +14,10 @@ router.route("/").get((req, res) => {
 
 router.route("/add").post((req, res) => {
   const username = req.body.username;
-
-  const newUser = new User({ username });
+  const password = req.body.password;
+  const myPassword = bcrypt.hash(password, 1);
+  console.log(myPassword);
+  const newUser = new User({ username, password });
 
   newUser
     .save()
