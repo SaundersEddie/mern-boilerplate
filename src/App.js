@@ -1,10 +1,14 @@
 import React from 'react';
 import logo from './logo.svg';
+import { Button, Typography } from '@material-ui/core';
+
 import './App.css';
 
 function App() {
   return (
     <div className="App">
+      <Button variant="contained" color="primary">Material-UI Test</Button>
+      <Typography variant="h3" color="green">Topography Test</Typography>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>

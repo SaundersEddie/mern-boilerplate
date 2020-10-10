@@ -14,9 +14,7 @@ router.route("/").get((req, res) => {
 
 router.route("/add").post((req, res) => {
   const username = req.body.username;
-  const password = req.body.password;
-  let myTestPass = bcrypt.hashSync(password, 10);
-  console.log(myTestPass);
+  const password = bcrypt.hashSync(req.body.password, 5);
   const newUser = new User({ username, password });
 
   newUser
@@ -24,13 +22,5 @@ router.route("/add").post((req, res) => {
     .then(() => res.json("User added!"))
     .catch((err) => res.status(400).json("Error: " + err));
 });
-
-// const myPassword = (password) => {
-//   console.log("In My Password)");
-//   console.log(password);
-//   let myTest = await bcrypt.hash(password, 1);
-//   console.log(myTest);
-//   return myTest;
-// };
 
 module.exports = router;
