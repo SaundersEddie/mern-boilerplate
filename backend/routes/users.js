@@ -24,11 +24,24 @@ router.route("/add").post((req, res) => {
 });
 
 router.route("/login").post((req, res) => {
-  // console.log("Request: ", req.body);
-  User.find({ username: req.body.username })
-    .then((users) => res.json(users))
-    .catch((err) => res.status(500).json("Error: " + err));
+  myName = req.body.username;
+  console.log ("myName: ", myName)
+  User.findOne({username: myName}, (error, data) => {
+    if (error) {
+      console.log ("Errored: ", error)
+    } else {
+     // console.log (data); 
+      if (data == null) {
+        console.log ("No results")
+      } else {
+        console.log ("We got resultd");
+        console.log (data);
+      }
+    }
+    
+  })
+
+  // bcrypt.compareSync
 });
-// bcrypt.compareSync
 
 module.exports = router;
