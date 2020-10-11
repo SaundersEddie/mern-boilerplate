@@ -23,4 +23,12 @@ router.route("/add").post((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+router.route("/login").post((req, res) => {
+  // console.log("Request: ", req.body);
+  User.find({ username: req.body.username })
+    .then((users) => res.json(users))
+    .catch((err) => res.status(500).json("Error: " + err));
+});
+// bcrypt.compareSync
+
 module.exports = router;
