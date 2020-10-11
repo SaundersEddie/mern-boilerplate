@@ -25,17 +25,24 @@ router.route("/add").post((req, res) => {
 
 router.route("/login").post((req, res) => {
   myName = req.body.username;
+  myPassword = req.body.password;
   console.log ("myName: ", myName)
   User.findOne({username: myName}, (error, data) => {
     if (error) {
       console.log ("Errored: ", error)
     } else {
-     // console.log (data); 
       if (data == null) {
         console.log ("No results")
       } else {
-        console.log ("We got resultd");
-        console.log (data);
+        console.log ("Checking Password");
+        console.log (data.username);
+        const decryptPassword = bcrypt.compareSync(myPassword, data.password);
+        console.log ("Decrypt Password: ", decryptPassword);
+        if (decryptPassword) {
+          console.log ("Password Accepted");
+        } else {
+          console.log ('Incorrect Password Supplied');
+        }
       }
     }
     
