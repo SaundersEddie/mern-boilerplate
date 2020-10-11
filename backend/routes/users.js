@@ -24,31 +24,21 @@ router.route("/add").post((req, res) => {
 });
 
 router.route("/login").post((req, res) => {
-  myName = req.body.username;
-  myPassword = req.body.password;
-  console.log ("myName: ", myName)
-  User.findOne({username: myName}, (error, data) => {
+  User.findOne({username: req.body.username}, (error, data) => {
     if (error) {
-      console.log ("Errored: ", error)
+      res.send ({message: error});
     } else {
       if (data == null) {
-        console.log ("No results")
+        res.send({message: "No users found"});
       } else {
-        console.log ("Checking Password");
-        console.log (data.username);
-        const decryptPassword = bcrypt.compareSync(myPassword, data.password);
-        console.log ("Decrypt Password: ", decryptPassword);
-        if (decryptPassword) {
-          console.log ("Password Accepted");
+        if (bcrypt.compareSync(req.body.password, data.password)) {
+          res.send({message: "Password Accepted"})
         } else {
-          console.log ('Incorrect Password Supplied');
+          res.send ({message: "Incorrect Password Supplied"})
         }
       }
     }
-    
   })
-
-  // bcrypt.compareSync
 });
 
 module.exports = router;
