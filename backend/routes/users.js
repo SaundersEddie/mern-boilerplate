@@ -1,6 +1,6 @@
 //  Our users routes
 const bcrypt = require("bcrypt");
-
+let isAuthenticated = false;
 console.log("In users");
 
 const router = require("express").Router();
@@ -32,6 +32,7 @@ router.route("/login").post((req, res) => {
         res.send({message: "No users found"});
       } else {
         if (bcrypt.compareSync(req.body.password, data.password)) {
+          isAuthenticate = true;
           res.send({message: "Password Accepted"})
         } else {
           res.send ({message: "Incorrect Password Supplied"})

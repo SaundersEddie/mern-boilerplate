@@ -1,10 +1,12 @@
 import React from 'react';
 import logo from './logo.svg';
 import { Button, Typography } from '@material-ui/core';
+// import { isAuthenticated } from "./routes/users";
 
 import './App.css';
 
 function App() {
+ // console.log (isAuthenticated);
   return (
     <div className="App">
       <Button variant="contained" color="primary">Material-UI Test</Button>

@@ -27,6 +27,7 @@ connection.once("open", () => {
 });
 
 app.use("/users", userRoutes);
+//console.log (isAuthenticated);
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
